@@ -1,1 +1,17 @@
-{"name":"Sportello Utenze – Energia Protetta","short_name":"Sportello Utenze","start_url":"./","display":"standalone","background_color":"#ffffff","theme_color":"#4cb845"}
+{
+  "name": "Sportello Utenze - Energia Protetta",
+  "short_name": "Sportello Utenze",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#35b44a",
+  "icons": [
+    {
+      "src": "./logo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
