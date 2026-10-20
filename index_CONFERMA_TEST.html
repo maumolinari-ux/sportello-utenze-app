@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><meta content="#4cb845" name="theme-color"/><link href="manifest.webmanifest" rel="manifest"/><title>Sportello Utenze</title><style>*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7f8;color:#12345a}.app{max-width:430px;margin:auto;min-height:100vh;background:white;padding:18px 18px 90px}.logo{width:100%;max-height:65px;object-fit:contain}.people{display:flex;gap:10px;margin:8px 0 12px}.people img{width:50%;height:90px;object-fit:cover;object-position:50% 25%;border-radius:20px}.h{font-size:25px;font-weight:800;text-align:center;margin:8px 0 4px}.sub{text-align:center;margin:0 0 18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{border:0;border-radius:22px;padding:20px 15px;color:#fff;min-height:110px;text-align:left;font-size:22px;font-weight:800;cursor:pointer}.card small{display:block;font-size:15px;font-weight:400;margin-top:8px}.red{background:#f34e4a}.blue{background:#287fe4}.green{background:#36ad55}.orange{background:#ff921c}.page{display:none}.page.active{display:block}.back{border:0;background:none;font-size:18px;color:#1769aa;padding:10px 0}.box{background:#f2f5f7;border-radius:18px;padding:16px;margin:14px 0}.big{width:100%;border:0;border-radius:16px;padding:16px;font-size:18px;font-weight:700;background:#1769aa;color:white;margin:8px 0}.input{width:100%;padding:15px;border:1px solid #ccd5dd;border-radius:14px;font-size:17px}.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:430px;width:100%;display:flex;background:white;border-top:1px solid #ddd}.nav button{flex:1;padding:15px 5px;border:0;background:white;color:#567;font-weight:700}.note{font-size:13px;color:#667}.alert{border-left:5px solid #36ad55;background:#f5f8f6;padding:14px;border-radius:12px;margin:10px 0}
+.app{padding-bottom:35px}.logo{display:block;margin:0 auto 8px}.grid{gap:10px}.card{min-height:116px;padding:16px 12px;font-size:18px;border-radius:17px}.card small{font-size:12px;line-height:1.35}.purple{background:#7561bd}.teal{background:#078e92}.nav{position:static;transform:none;max-width:none;margin:26px 0 0;border-top:1px solid #ddd}.nav button{cursor:pointer}.input,select,textarea{width:100%;padding:13px;border:1px solid #cbd4da;border-radius:12px;font:inherit;margin:6px 0 12px}textarea{min-height:90px}.big{cursor:pointer}.muted{color:#596b7b;font-size:14px;line-height:1.5}.field{display:block;font-weight:650;margin-top:9px}.check{display:flex;align-items:flex-start;gap:10px;margin:16px 0;font-size:14px;line-height:1.4}.check input{margin-top:3px;flex-shrink:0}.legal{font-size:13px;margin:15px 0;line-height:1.5}.notice{background:#e9f6ed;padding:12px;border-radius:12px}.foot{margin-top:20px;text-align:center}.foot button{border:0;background:none;color:#1769aa;text-decoration:underline;font-size:13px;cursor:pointer}.big:disabled{opacity:.6}.small{font-size:13px}
+.formframe{margin:14px -8px;border-radius:14px;overflow:hidden;background:#f6f7fa}.formframe iframe{width:100%;height:790px;border:0;display:block}#branch .formframe iframe{height:1000px}#newsletter .formframe iframe{height:690px}@media(max-width:400px){.formframe{margin-left:-12px;margin-right:-12px}}.share-invite{display:block;width:100%;margin:16px 0 0;padding:16px 14px;border:0;border-radius:17px;background:#0099ad;color:white;font-size:19px;font-weight:700;cursor:pointer}.share-invite:focus-visible{outline:3px solid #12345a;outline-offset:3px}</style></head><body><main class="app"><section class="page active" id="home"><img alt="Sportello Utenze" class="logo" src="logo.png"/><div class="h">Come possiamo aiutarti?</div><p class="sub">Scegli il servizio di cui hai bisogno.</p><div class="grid">
+<button class="card red" onclick="go('call')">☎ Chiamata sospetta<small>Raccontaci cosa è successo</small></button>
+<button class="card blue" onclick="go('bill')">▤ Controlla la bolletta<small>Controllo gratuito</small></button>
+<button class="card orange" onclick="go('contact')">💬 Chiedi a noi<small>Scrivici su WhatsApp</small></button>
+<button class="card green" onclick="go('home-new')">📄 Voltura o subentro?<small>Assistenza gratuita</small></button>
+<button class="card purple" onclick="go('branch')">🏪 Apri uno Sportello<small>Con un tuo investimento</small></button>
+<button class="card teal" onclick="go('newsletter')">✉ Iscriviti alla newsletter<small>Offerte e aggiornamenti</small></button>
+</div><button class="share-invite" type="button" onclick="shareApp()">↗ Invita un amico</button></section><section class="page" id="call"><button class="back" onclick="go('home')">← Home</button><h1>☎ Chiamata sospetta</h1><div class="box"><h2>Hai ricevuto una chiamata sospetta?</h2><p>Ti hanno proposto di cambiare fornitore di luce o gas? Ti hanno chiesto dati personali o informazioni sulla bolletta?</p><p><b>Contattaci e raccontaci cosa è successo.</b></p><p>Ti aiuteremo a capire come comportarti, senza impegno.</p></div><button class="big" onclick="openWa('Buongiorno, ho ricevuto una chiamata sospetta e vorrei raccontarvi cosa è successo.')">💬 Raccontaci su WhatsApp</button><p class="muted">Consulenza gratuita, senza obbligo di sottoscrivere contratti.</p><p class="legal">Consulta la nostra <a href="https://sportelloutenze.it/privacy.html" target="_blank" rel="noopener noreferrer">informativa privacy</a>.</p></section><section class="page" id="bill"><button class="back" onclick="go('home')">← Home</button><h1>▤ Controlla la bolletta</h1><p><b>Vuoi sapere se stai pagando troppo per luce e gas?</b></p><p>Controlliamo insieme la tua bolletta, verifichiamo se hai un prezzo fisso o variabile e analizziamo le condizioni della tua fornitura.</p><div class="box"><b>Consulenza gratuita, anche telefonica, senza obbligo di cambiare fornitore o sottoscrivere contratti.</b></div><button class="big" onclick="openWa('Buongiorno, vorrei richiedere un controllo gratuito della mia bolletta luce/gas. Vorrei inviarvi le pagine o il PDF completo tramite WhatsApp.')">💬 Invia la bolletta su WhatsApp</button><p class="muted">Puoi allegare le fotografie o il PDF direttamente nella conversazione WhatsApp. Evita di condividere dati non necessari.</p><a class="big" style="display:block;text-align:center;text-decoration:none;background:#36ad55" href="https://script.google.com/macros/s/AKfycbwbvEdDAB_0tDNLduugKXijHOzRh5z7DNXPPr-S2Df30Y5XJMdtarCvgHaDjTm2m2Zn/exec" target="_blank" rel="noopener noreferrer">☎ Richiedi una chiamata gratuita</a><p class="muted">Lascia il tuo recapito nel modulo. Ti richiameremo dal numero <b>02 45496626</b>, possibilmente nella fascia oraria indicata.</p><p class="legal">Prima di inviare dati personali, consulta l’<a href="https://sportelloutenze.it/privacy.html" target="_blank" rel="noopener noreferrer">informativa privacy</a>.</p></section><section class="page" id="contact"><button class="back" onclick="go('home')">← Home</button><h1>💬 Chiedi a noi</h1><div class="box"><h2>Hai un dubbio? Scrivici</h2><p>Controllo bollette, supporto sulle chiamate sospette e assistenza.</p></div><button class="big" onclick="openWa('Buongiorno, vi contatto dall’app Sportello Utenze. Avrei bisogno di informazioni.')">💬 Scrivici su WhatsApp</button></section><section class="page" id="home-new"><button class="back" onclick="go('home')">← Home</button><h1>Voltura o subentro?</h1><p>Richiedi assistenza gratuita, senza obbligo di sottoscrivere contratti.</p><div class="formframe"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://forms.gle/x6bdWE5twZUUx3jTA" title="Voltura o subentro?"></iframe></div><p class="muted">Se il modulo non appare sul tuo dispositivo, <a href="https://forms.gle/x6bdWE5twZUUx3jTA" rel="noopener noreferrer" target="_blank">aprilo qui</a>.</p></section><section class="page" id="branch"><button class="back" onclick="go('home')">← Home</button>
+<h1>Vuoi aprire uno Sportello Utenze nella tua città?</h1>
+<div class="box"><p>Un’opportunità per avviare e gestire <b>un’attività indipendente</b>, che prevede un <b>investimento iniziale</b>.</p></div>
+<form id="branchForm" action="https://script.google.com/macros/s/AKfycbyqBPH8tFkh6v5mv5teZdKQkidSZQEFnOrhqPEBvQhvLxY1qU-rADGo-8nJlLpi-Bpdfg/exec" method="post" target="branchReceiver">
+<label class="field" for="br-nome">Nome e cognome *</label><input class="input" id="br-nome" name="nome" required maxlength="150" autocomplete="name">
+<label class="field" for="br-telefono">Telefono *</label><input class="input" id="br-telefono" name="telefono" type="tel" required maxlength="40" autocomplete="tel">
+<label class="field" for="br-email">Email *</label><input class="input" id="br-email" name="email" type="email" required maxlength="200" autocomplete="email">
+<label class="field" for="br-citta">Città di interesse per l'attività *</label><input class="input" id="br-citta" name="citta" required maxlength="150">
+<label class="field" for="br-locale">Hai già un locale disponibile? *</label><select id="br-locale" name="locale" required><option value="">Seleziona una risposta</option><option value="SÌ, HO GIÀ UN LOCALE">SÌ, HO GIÀ UN LOCALE</option><option value="NO, DEVO ANCORA TROVARLO">NO, DEVO ANCORA TROVARLO</option><option value="VORREI PRIMA CONOSCERE MEGLIO IL PROGETTO">VORREI PRIMA CONOSCERE MEGLIO IL PROGETTO</option></select>
+<label class="field" for="br-esperienza">Esperienza professionale *</label><textarea id="br-esperienza" name="esperienza" required maxlength="3000"></textarea>
+<div class="box legal">I dati personali forniti saranno utilizzati per gestire la tua richiesta di informazioni sull'apertura di uno Sportello Utenze. Leggi l'<a href="https://sportelloutenze.it/privacy.html" target="_blank" rel="noopener noreferrer">informativa privacy</a>.</div>
+<label class="check"><input type="checkbox" id="br-privacy" required><span>Dichiaro di aver preso visione dell'informativa privacy relativa al trattamento dei miei dati personali. *</span></label>
+<input type="hidden" name="privacy" value="true"><input type="hidden" name="richiesta_id" id="br-request-id"><div style="position:absolute;left:-9999px" aria-hidden="true"><label>Non compilare <input type="text" name="sito_web" tabindex="-1" autocomplete="off"></label></div>
+<button class="big" style="background:#7561bd" id="branchSubmit" type="submit">Invia la richiesta</button><p id="branchStatus" class="muted" role="status" aria-live="polite"></p>
+</form><iframe name="branchReceiver" title="Ricezione richiesta" style="display:none"></iframe>
+</section><section class="page" id="newsletter"><button class="back" onclick="go('home')">← Home</button><h1>Iscriviti alla newsletter</h1><p>Ricevi gratuitamente aggiornamenti e consigli. Iscrizione con conferma via email.</p><div class="formframe"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://6680f7c0.sibforms.com/serve/MUIFAG9JI6rDeli7XGB6la6Wf21_1Bg3V3bo1dNTBlL5bK9e6UPzwbwvI0oXzwBG-fdu8EVyFmXFFcmjqEQcsHyiR3BTfLR6U7HWKZDZ4VbgZSJ22hD3F3h1i9mEGB74e95Wxe7wVL4CZr4rqfZMeYIsiMAaivmIewqvqZ1R36vak-PNvjjZUw9kgmQfs-Qn49MWJT7RBmdDzcMK" title="Iscriviti alla newsletter"></iframe></div><p class="muted">Se il modulo non appare sul tuo dispositivo, <a href="https://6680f7c0.sibforms.com/serve/MUIFAG9JI6rDeli7XGB6la6Wf21_1Bg3V3bo1dNTBlL5bK9e6UPzwbwvI0oXzwBG-fdu8EVyFmXFFcmjqEQcsHyiR3BTfLR6U7HWKZDZ4VbgZSJ22hD3F3h1i9mEGB74e95Wxe7wVL4CZr4rqfZMeYIsiMAaivmIewqvqZ1R36vak-PNvjjZUw9kgmQfs-Qn49MWJT7RBmdDzcMK" rel="noopener noreferrer" target="_blank">aprilo qui</a>.</p></section><section class="page" id="privacy"><button class="back" onclick="go('home')">← Home</button><h1>🔒 Privacy</h1><div class="box"><p>I moduli per volture, subentri e apertura Sportello sono gestiti tramite Google Forms; la newsletter tramite Brevo. Le rispettive informative e le indicazioni sul trattamento dei dati sono disponibili nei moduli.</p><p>Prima di inviare dati personali, consulta l’<a href="https://sportelloutenze.it/privacy.html" target="_blank" rel="noopener noreferrer">informativa privacy completa di Sportello Utenze</a>.</p></div></section><nav class="nav"><button onclick="go('home')">⌂<br/>Home</button><button onclick="go('contact')">💬<br/>Contatti</button><button onclick="go('privacy')">🔒<br/>Privacy</button></nav><div class="foot"><button onclick="go('privacy')">Privacy e trattamento dei dati</button></div></main><script>
+function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+function openWa(msg){window.location.href='https://wa.me/393751310748?text='+encodeURIComponent(msg)}
+
+
+async function shareApp(){
+  const url='https://maumolinari-ux.github.io/sportello-utenze-app/';
+  const text='Ti consiglio Sportello Utenze, un’app gratuita che ti aiuta con le bollette di luce e gas, le chiamate sospette e le volture. Puoi utilizzarla anche tu!';
+  if(navigator.share){
+    try{await navigator.share({title:'Sportello Utenze',text,url});return;}
+    catch(error){if(error && error.name==='AbortError')return;}
+  }
+  const message=text+'\n'+url;
+  window.location.href='https://wa.me/?text='+encodeURIComponent(message);
+}
+// Conferma tramite verifica del salvataggio su Google Apps Script.
+const branchForm=document.getElementById('branchForm');
+const branchStatus=document.getElementById('branchStatus');
+const branchSubmit=document.getElementById('branchSubmit');
+const branchEndpoint=branchForm.action;
+let branchPending=false;
+let branchCheckTimer=null;
+let branchCheckCount=0;
+let branchCurrentId='';
+
+function branchStop(){
+  branchPending=false;
+  if(branchCheckTimer){clearTimeout(branchCheckTimer);branchCheckTimer=null;}
+  branchSubmit.disabled=false;
+}
+function branchSuccess(){
+  if(!branchPending)return;
+  branchStop();
+  branchForm.reset();
+  branchStatus.innerHTML='<div class="notice" style="margin-top:16px"><strong>✓ Richiesta ricevuta!</strong><p>Grazie per averci contattato. Ti risponderemo al più presto.</p><button class="big" type="button" onclick="go(\'home\')">← Torna alla Home</button></div>';
+}
+function branchCheckStatus(){
+  if(!branchPending)return;
+  if(branchCheckCount++ >= 15){
+    branchStop();
+    branchStatus.textContent='Non siamo riusciti a verificare automaticamente la ricezione. Prima di inviare di nuovo, controlla la tua email o contattaci.';
+    return;
+  }
+  const callback='branchCallback_'+Date.now()+'_'+Math.floor(Math.random()*100000);
+  const script=document.createElement('script');
+  let resolved=false;
+  const finish=()=>{if(script.parentNode)script.remove();try{delete window[callback]}catch(e){window[callback]=undefined};if(branchPending)branchCheckTimer=setTimeout(branchCheckStatus,2000)};
+  const timeout=setTimeout(()=>{if(!resolved){resolved=true;finish()}},4000);
+  window[callback]=function(result){
+    if(resolved)return;
+    resolved=true;clearTimeout(timeout);
+    if(branchPending && result && result.id===branchCurrentId && result.ok===true){
+      if(script.parentNode)script.remove();delete window[callback];branchSuccess();
+    } else finish();
+  };
+  script.onerror=function(){if(!resolved){resolved=true;clearTimeout(timeout);finish()}};
+  script.src=branchEndpoint+'?action=stato&id='+encodeURIComponent(branchCurrentId)+'&callback='+encodeURIComponent(callback)+'&t='+Date.now();
+  document.head.appendChild(script);
+}
+branchForm.addEventListener('submit',function(){
+  if(branchPending)return;
+  branchCurrentId='su_'+Date.now()+'_'+Math.random().toString(36).slice(2,12);
+  document.getElementById('br-request-id').value=branchCurrentId;
+  branchPending=true;
+  branchCheckCount=0;
+  branchSubmit.disabled=true;
+  branchStatus.textContent='Invio in corso… attendi la conferma.';
+  branchCheckTimer=setTimeout(branchCheckStatus,2500);
+});
+// Conserviamo anche la vecchia modalità di risposta, se disponibile.
+window.addEventListener('message',function(event){
+  if(!branchPending || !event.data || event.data.type!=='sportello-branch-result')return;
+  if(!['https://script.google.com','https://script.googleusercontent.com'].includes(event.origin) && !event.origin.endsWith('.googleusercontent.com'))return;
+  if(event.data.ok===true)branchSuccess();
+});
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script></body></html>
