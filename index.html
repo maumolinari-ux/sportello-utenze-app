@@ -20,7 +20,7 @@
 <label class="field" for="br-esperienza">Esperienza professionale *</label><textarea id="br-esperienza" name="esperienza" required maxlength="3000"></textarea>
 <div class="box legal">I dati personali forniti saranno utilizzati per gestire la tua richiesta di informazioni sull'apertura di uno Sportello Utenze. Leggi l'<a href="https://sportelloutenze.it/privacy.html" target="_blank" rel="noopener noreferrer">informativa privacy</a>.</div>
 <label class="check"><input type="checkbox" id="br-privacy" required><span>Dichiaro di aver preso visione dell'informativa privacy relativa al trattamento dei miei dati personali. *</span></label>
-<input type="hidden" name="privacy" value="true"><div style="position:absolute;left:-9999px" aria-hidden="true"><label>Non compilare <input type="text" name="sito_web" tabindex="-1" autocomplete="off"></label></div>
+<input type="hidden" name="privacy" value="true"><input type="hidden" name="richiesta_id" id="br-request-id"><div style="position:absolute;left:-9999px" aria-hidden="true"><label>Non compilare <input type="text" name="sito_web" tabindex="-1" autocomplete="off"></label></div>
 <button class="big" style="background:#7561bd" id="branchSubmit" type="submit">Invia la richiesta</button><p id="branchStatus" class="muted" role="status" aria-live="polite"></p>
 </form><iframe name="branchReceiver" title="Ricezione richiesta" style="display:none"></iframe>
 </section><section class="page" id="newsletter"><button class="back" onclick="go('home')">← Home</button><h1>Iscriviti alla newsletter</h1><p>Ricevi gratuitamente aggiornamenti e consigli. Iscrizione con conferma via email.</p><div class="formframe"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://6680f7c0.sibforms.com/serve/MUIFAG9JI6rDeli7XGB6la6Wf21_1Bg3V3bo1dNTBlL5bK9e6UPzwbwvI0oXzwBG-fdu8EVyFmXFFcmjqEQcsHyiR3BTfLR6U7HWKZDZ4VbgZSJ22hD3F3h1i9mEGB74e95Wxe7wVL4CZr4rqfZMeYIsiMAaivmIewqvqZ1R36vak-PNvjjZUw9kgmQfs-Qn49MWJT7RBmdDzcMK" title="Iscriviti alla newsletter"></iframe></div><p class="muted">Se il modulo non appare sul tuo dispositivo, <a href="https://6680f7c0.sibforms.com/serve/MUIFAG9JI6rDeli7XGB6la6Wf21_1Bg3V3bo1dNTBlL5bK9e6UPzwbwvI0oXzwBG-fdu8EVyFmXFFcmjqEQcsHyiR3BTfLR6U7HWKZDZ4VbgZSJ22hD3F3h1i9mEGB74e95Wxe7wVL4CZr4rqfZMeYIsiMAaivmIewqvqZ1R36vak-PNvjjZUw9kgmQfs-Qn49MWJT7RBmdDzcMK" rel="noopener noreferrer" target="_blank">aprilo qui</a>.</p></section><section class="page" id="privacy"><button class="back" onclick="go('home')">← Home</button><h1>🔒 Privacy</h1><div class="box"><p>I moduli per volture, subentri e apertura Sportello sono gestiti tramite Google Forms; la newsletter tramite Brevo. Le rispettive informative e le indicazioni sul trattamento dei dati sono disponibili nei moduli.</p><p>Prima di inviare dati personali, consulta l’<a href="https://sportelloutenze.it/privacy.html" target="_blank" rel="noopener noreferrer">informativa privacy completa di Sportello Utenze</a>.</p></div></section><nav class="nav"><button onclick="go('home')">⌂<br/>Home</button><button onclick="go('contact')">💬<br/>Contatti</button><button onclick="go('privacy')">🔒<br/>Privacy</button></nav><div class="foot"><button onclick="go('privacy')">Privacy e trattamento dei dati</button></div></main><script>
@@ -38,22 +38,66 @@ async function shareApp(){
   const message=text+'\n'+url;
   window.location.href='https://wa.me/?text='+encodeURIComponent(message);
 }
-// Il backend esistente restituisce un messaggio quando il modulo viene ricevuto.
-// Se il browser blocca la risposta cross-origin, verificare Google Fogli ed email.
+// Conferma tramite verifica del salvataggio su Google Apps Script.
 const branchForm=document.getElementById('branchForm');
+const branchStatus=document.getElementById('branchStatus');
+const branchSubmit=document.getElementById('branchSubmit');
+const branchEndpoint=branchForm.action;
 let branchPending=false;
+let branchCheckTimer=null;
+let branchCheckCount=0;
+let branchCurrentId='';
+
+function branchStop(){
+  branchPending=false;
+  if(branchCheckTimer){clearTimeout(branchCheckTimer);branchCheckTimer=null;}
+  branchSubmit.disabled=false;
+}
+function branchSuccess(){
+  if(!branchPending)return;
+  branchStop();
+  branchForm.reset();
+  branchStatus.innerHTML='<div class="notice" style="margin-top:16px"><strong>✓ Richiesta ricevuta!</strong><p>Grazie per averci contattato. Ti risponderemo al più presto.</p><button class="big" type="button" onclick="go(\'home\')">← Torna alla Home</button></div>';
+}
+function branchCheckStatus(){
+  if(!branchPending)return;
+  if(branchCheckCount++ >= 15){
+    branchStop();
+    branchStatus.textContent='Non siamo riusciti a verificare automaticamente la ricezione. Prima di inviare di nuovo, controlla la tua email o contattaci.';
+    return;
+  }
+  const callback='branchCallback_'+Date.now()+'_'+Math.floor(Math.random()*100000);
+  const script=document.createElement('script');
+  let resolved=false;
+  const finish=()=>{if(script.parentNode)script.remove();try{delete window[callback]}catch(e){window[callback]=undefined};if(branchPending)branchCheckTimer=setTimeout(branchCheckStatus,2000)};
+  const timeout=setTimeout(()=>{if(!resolved){resolved=true;finish()}},4000);
+  window[callback]=function(result){
+    if(resolved)return;
+    resolved=true;clearTimeout(timeout);
+    if(branchPending && result && result.id===branchCurrentId && result.ok===true){
+      if(script.parentNode)script.remove();delete window[callback];branchSuccess();
+    } else finish();
+  };
+  script.onerror=function(){if(!resolved){resolved=true;clearTimeout(timeout);finish()}};
+  script.src=branchEndpoint+'?action=stato&id='+encodeURIComponent(branchCurrentId)+'&callback='+encodeURIComponent(callback)+'&t='+Date.now();
+  document.head.appendChild(script);
+}
 branchForm.addEventListener('submit',function(){
+  if(branchPending)return;
+  branchCurrentId='su_'+Date.now()+'_'+Math.random().toString(36).slice(2,12);
+  document.getElementById('br-request-id').value=branchCurrentId;
   branchPending=true;
-  document.getElementById('branchStatus').textContent='Invio avviato. Attendi la conferma; se non appare, controlla la ricezione nel Google Foglio e via email.';
-  document.getElementById('branchSubmit').disabled=true;
+  branchCheckCount=0;
+  branchSubmit.disabled=true;
+  branchStatus.textContent='Invio in corso… attendi la conferma.';
+  branchCheckTimer=setTimeout(branchCheckStatus,2500);
 });
+// Conserviamo anche la vecchia modalità di risposta, se disponibile.
 window.addEventListener('message',function(event){
   if(!branchPending || !event.data || event.data.type!=='sportello-branch-result')return;
   if(!['https://script.google.com','https://script.googleusercontent.com'].includes(event.origin) && !event.origin.endsWith('.googleusercontent.com'))return;
-  branchPending=false;
-  document.getElementById('branchSubmit').disabled=false;
-  if(event.data.ok){document.getElementById('branchStatus').textContent='Richiesta inviata correttamente!';branchForm.reset();}
-  else document.getElementById('branchStatus').textContent='Invio non confermato. Controlla i dati e riprova.';
+  if(event.data.ok===true)branchSuccess();
 });
+
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script></body></html>
