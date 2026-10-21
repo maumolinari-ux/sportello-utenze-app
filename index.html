@@ -22,7 +22,26 @@
 <input type="hidden" name="privacy" value="true"><input type="hidden" name="richiesta_id" id="bill-request-id"><div style="position:absolute;left:-9999px" aria-hidden="true"><label>Non compilare <input type="text" name="sito" tabindex="-1" autocomplete="off"></label></div>
 <button class="big" style="background:#10ba6c" type="submit" id="billSubmit">Richiedi una chiamata gratuita</button><p id="billStatus" class="muted" role="status" aria-live="polite"></p></form>
 <iframe name="billReceiver" title="Ricezione richiesta controllo bolletta" style="display:none"></iframe>
-<p class="muted">Ti richiameremo dal numero <b>02 45496626</b>, possibilmente nella fascia indicata.</p></section><section class="page" id="contact"><button class="back" onclick="go('home')">← Home</button><h1>💬 Chiedi a noi</h1><div class="box"><h2>Hai un dubbio? Scrivici</h2><p>Controllo bollette, supporto sulle chiamate sospette e assistenza.</p></div><button class="big" onclick="openWa('Buongiorno, vi contatto dall’app Sportello Utenze. Avrei bisogno di informazioni.')">💬 Scrivici su WhatsApp</button></section><section class="page" id="home-new"><button class="back" onclick="go('home')">← Home</button><h1>Voltura o subentro?</h1><p>Richiedi assistenza gratuita, senza obbligo di sottoscrivere contratti.</p><div class="formframe"><iframe loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://forms.gle/x6bdWE5twZUUx3jTA" title="Voltura o subentro?"></iframe></div><p class="muted">Se il modulo non appare sul tuo dispositivo, <a href="https://forms.gle/x6bdWE5twZUUx3jTA" rel="noopener noreferrer" target="_blank">aprilo qui</a>.</p></section><section class="page" id="branch"><button class="back" onclick="go('home')">← Home</button>
+<p class="muted">Ti richiameremo dal numero <b>02 45496626</b>, possibilmente nella fascia indicata.</p></section><section class="page" id="contact"><button class="back" onclick="go('home')">← Home</button><h1>💬 Chiedi a noi</h1><div class="box"><h2>Hai un dubbio? Scrivici</h2><p>Controllo bollette, supporto sulle chiamate sospette e assistenza.</p></div><button class="big" onclick="openWa('Buongiorno, vi contatto dall’app Sportello Utenze. Avrei bisogno di informazioni.')">💬 Scrivici su WhatsApp</button></section><section class="page" id="home-new"><button class="back" onclick="go('home')">← Home</button>
+<h1>Voltura o subentro?</h1><p>Devi intestarti le utenze di luce o gas oppure riattivare un contatore?</p>
+<div class="box"><b>Sportello Utenze ti offre assistenza gratuita, senza impegno e senza obbligo di sottoscrivere contratti.</b></div>
+<form id="volturaForm" action="https://script.google.com/macros/s/AKfycbxsfpHagVmvjVBloL-PqQ0TqSf2KKTsBUcWZ5OKnPkE4XzyqhavGLBbBDmKLvFj1Fky9Q/exec" method="post" target="volturaReceiver">
+<label class="field" for="vs-nome">Nome e cognome *</label><input class="input" id="vs-nome" name="nome" required maxlength="150" autocomplete="name">
+<label class="field" for="vs-telefono">Telefono *</label><input class="input" id="vs-telefono" name="telefono" type="tel" required maxlength="40" autocomplete="tel" pattern="[+0-9 ()-]{6,40}">
+<label class="field" for="vs-email">Email (facoltativa)</label><input class="input" id="vs-email" name="email" type="email" maxlength="200" autocomplete="email">
+<fieldset style="border:1px solid #cbd4da;border-radius:12px;margin:12px 0;padding:12px"><legend><b>Di quale operazione hai bisogno? *</b></legend>
+<label class="check"><input type="radio" name="operazione" value="Voltura" required> Voltura</label>
+<label class="check"><input type="radio" name="operazione" value="Subentro"> Subentro</label>
+<label class="check"><input type="radio" name="operazione" value="Non lo so, vorrei un consiglio"> Non lo so, vorrei un consiglio…</label></fieldset>
+<fieldset style="border:1px solid #cbd4da;border-radius:12px;margin:12px 0;padding:12px"><legend><b>Per quali utenze hai bisogno di assistenza? *</b></legend>
+<label class="check"><input type="checkbox" id="vs-luce"> Luce</label><label class="check"><input type="checkbox" id="vs-gas"> Gas</label></fieldset>
+<input type="hidden" id="vs-utenze" name="utenze">
+<label class="field" for="vs-note">Vuoi aggiungere qualche informazione? (facoltativo)</label><textarea id="vs-note" name="note" maxlength="3000"></textarea>
+<div class="box legal">I dati saranno utilizzati per gestire la tua richiesta di assistenza e ricontattarti. Consulta l'<a href="https://sportelloutenze.it/privacy.html" target="_blank" rel="noopener noreferrer">informativa privacy</a>.</div>
+<label class="check"><input type="checkbox" id="vs-privacy" required><span>Dichiaro di aver preso visione dell'informativa privacy. *</span></label>
+<input type="hidden" name="privacy" value="true"><input type="hidden" name="richiesta_id" id="vs-request-id"><div style="position:absolute;left:-9999px" aria-hidden="true"><label>Non compilare <input type="text" name="sito_web" tabindex="-1" autocomplete="off"></label></div>
+<button class="big" style="background:#36ad55" id="volturaSubmit" type="submit">Invia richiesta di assistenza gratuita</button><p id="volturaStatus" class="muted" role="status" aria-live="polite"></p></form>
+<iframe name="volturaReceiver" title="Ricezione richiesta voltura o subentro" style="display:none"></iframe></section><section class="page" id="branch"><button class="back" onclick="go('home')">← Home</button>
 <h1>Vuoi aprire uno Sportello Utenze nella tua città?</h1>
 <div class="box"><p>Un’opportunità per avviare e gestire <b>un’attività indipendente</b>, che prevede un <b>investimento iniziale</b>.</p></div>
 <form id="branchForm" action="https://script.google.com/macros/s/AKfycbyqBPH8tFkh6v5mv5teZdKQkidSZQEFnOrhqPEBvQhvLxY1qU-rADGo-8nJlLpi-Bpdfg/exec" method="post" target="branchReceiver">
@@ -150,6 +169,47 @@ billForm.addEventListener('submit',function(){
   billPending=true;billChecks=0;billSubmit.disabled=true;
   billStatus.textContent='Invio in corso… attendi la conferma.';
   billTimer=setTimeout(billCheck,2500);
+});
+
+
+// Voltura e subentro: conferma dopo verifica di ricezione sul server.
+const volturaForm=document.getElementById('volturaForm');
+const volturaSubmit=document.getElementById('volturaSubmit');
+const volturaStatus=document.getElementById('volturaStatus');
+const volturaEndpoint=volturaForm.action;
+let volturaPending=false,volturaRequestId='',volturaChecks=0,volturaTimer=null;
+function volturaSuccess(){
+ if(!volturaPending)return;
+ volturaPending=false;clearTimeout(volturaTimer);volturaForm.reset();volturaSubmit.disabled=false;
+ volturaStatus.innerHTML='<div class="notice" style="margin-top:16px"><strong>✓ Richiesta ricevuta!</strong><p>Grazie! Ti ricontatteremo presto.</p><button class="big" type="button" onclick="go(\'home\')">← Torna alla Home</button></div>';
+}
+function volturaCheck(){
+ if(!volturaPending)return;
+ if(++volturaChecks>20){volturaPending=false;volturaSubmit.disabled=false;volturaStatus.textContent='Conferma non disponibile. Prima di riprovare, verifica se la richiesta è arrivata.';return;}
+ const callback='volturaCallback_'+Date.now()+'_'+Math.floor(Math.random()*100000);
+ const script=document.createElement('script');let finished=false;
+ const finish=()=>{if(script.parentNode)script.remove();try{delete window[callback]}catch(e){window[callback]=undefined;}if(volturaPending)volturaTimer=setTimeout(volturaCheck,2000);};
+ const timeout=setTimeout(()=>{if(!finished){finished=true;finish();}},4500);
+ window[callback]=function(result){
+  if(finished)return;finished=true;clearTimeout(timeout);
+  if(volturaPending&&result&&result.id===volturaRequestId&&result.ok===true){
+   if(script.parentNode)script.remove();delete window[callback];volturaSuccess();
+  }else finish();
+ };
+ script.onerror=function(){if(!finished){finished=true;clearTimeout(timeout);finish();}};
+ script.src=volturaEndpoint+'?action=stato&id='+encodeURIComponent(volturaRequestId)+'&callback='+encodeURIComponent(callback)+'&t='+Date.now();
+ document.head.appendChild(script);
+}
+volturaForm.addEventListener('submit',function(event){
+ if(volturaPending){event.preventDefault();return;}
+ const luce=document.getElementById('vs-luce').checked,gas=document.getElementById('vs-gas').checked;
+ if(!luce&&!gas){event.preventDefault();volturaStatus.textContent='Seleziona almeno una utenza: Luce o Gas.';return;}
+ document.getElementById('vs-utenze').value=luce&&gas?'Luce e gas':luce?'Luce':'Gas';
+ volturaRequestId='vs_'+Date.now()+'_'+Math.random().toString(36).slice(2,12);
+ document.getElementById('vs-request-id').value=volturaRequestId;
+ volturaPending=true;volturaChecks=0;volturaSubmit.disabled=true;
+ volturaStatus.textContent='Invio in corso… attendi la conferma.';
+ volturaTimer=setTimeout(volturaCheck,2500);
 });
 
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
